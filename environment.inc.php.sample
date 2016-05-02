@@ -1,0 +1,9 @@
+<?php
+// スクリプト設置ディレクトリ
+define ('SCRIPT_DIR', './') ;
+
+define ('SLACK_API_TOKEN', '') ;
+
+define ('YAHOO_J_APP_ID', '') ;
+
+?>

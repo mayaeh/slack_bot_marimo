@@ -29,7 +29,7 @@ function yahoo_ma ($text_body)
 
 //	$arr_response [0] = 'surface' ;		// surface	: 表記
 //	$arr_response [1] = 'reading' ;		// reading	: よみ
-//	$arr_response [2] = 'pos' ;			// pos		: 品詞
+//	$arr_response [2] = 'pos' ;		// pos		: 品詞
 //	$arr_response [3] = 'baseform' ;	// baseform	: 基本形
 	$arr_response [4] = 'feature' ;		// feature	: 全情報
 
@@ -108,35 +108,35 @@ function yahoo_ma ($text_body)
 				$arr_response[0] != "" )
 			{
 				$res .= 'surface : ' . 
-					escapestring ( $cur -> surface ) . 
+					sqlite_escape_string ( $cur -> surface ) . 
 					"\n" ;
 			}
 			if ( isset ( $arr_response[1] ) && 
 				$arr_response[1] != '' )
 			{
 				$res .= 'reading : ' . 
-					escapestring ( $cur -> reading ) . 
+					sqlite_escape_string ( $cur -> reading ) . 
 					"\n" ;
 			}
 			if ( isset ( $arr_response[2] ) && 
 				$arr_response[2] != '' )
 			{
 				$res .= 'pos : ' . 
-					escapestring ( $cur -> pos ) . 
+					sqlite_escape_string ( $cur -> pos ) . 
 					"\n" ;
 			}
 			if ( isset ( $arr_response[3] ) && 
 				$arr_response[3] != '' )
 			{
 				$res .= 'baseform : ' . 
-					escapestring ( $cur -> baseform ) . 
+					sqlite_escape_string ( $cur -> baseform ) . 
 					"\n" ;
 			}
 			if ( isset ( $arr_response[4] ) && 
 				$arr_response[4] != '' )
 			{
 				$res .= 'feature : ' . 
-					escapestring ( $cur -> feature ) . 
+					sqlite_escape_string ( $cur -> feature ) . 
 					"\n" ;
 			}
 		}

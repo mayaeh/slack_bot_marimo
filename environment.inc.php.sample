@@ -6,4 +6,6 @@ define ('SLACK_API_TOKEN', '') ;
 
 define ('YAHOO_J_APP_ID', '') ;
 
+define ('BOT_USER_ID', '') ;
+
 ?>

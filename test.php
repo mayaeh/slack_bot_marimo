@@ -23,10 +23,20 @@ class SuperCommand extends \PhpSlackBot\Command\BaseCommand {
             //echo $username.' from '.($channel ? $channel : 'DIRECT MESSAGE').' : '.$data['text'].PHP_EOL;
 
 
+			if (preg_match ("/^<@" . 
+				BOT_USER_ID . ">/u", 
+				$data['text']) ) {
+
+
 // for debug
-$thismessage = $username . ' from ' . ($channel ? $channel : 'DM' ) . ' : ' . $data['text'] ;
-$this -> send($data['channel'], $data['user'], $thismessage);
+				$thismessage = $username . ' from ' . 
+					($channel ? $channel : 'DM' ) . 
+					' : ' . $data['text'] ;
+
+				$this -> send($data['channel'], 
+					$data['user'], $thismessage);
   
+  			}
   
         }
     }

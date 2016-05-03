@@ -23,20 +23,55 @@ class SuperCommand extends \PhpSlackBot\Command\BaseCommand {
             //echo $username.' from '.($channel ? $channel : 'DIRECT MESSAGE').' : '.$data['text'].PHP_EOL;
 
 
+			// 文の最初に @marimo を付けて呼ばれた場合
 			if (preg_match ("/^<@" . 
 				BOT_USER_ID . ">/u", 
 				$data['text']) ) {
 
+				$action_flg = 1;
 
-// for debug
+			}
+			// 文の末尾に @marimo を付けて呼ばれた場合
+			else if (preg_match ("/<@" . 
+				BOT_USER_ID . ">$/u", 
+				$data['text']) ) {
+				
+				$action_flg = 2;
+			}
+			// 文の途中で @marimo を付けて呼ばれた場合
+			else if (preg_match ("/<@" . 
+				BOT_USER_ID . ">/u", 
+				$data['text']) ) {
+				
+				$action_flg = 3;
+			}
+
+
+			switch ($action_flg) {
+
+			case 1:
+
+			case 2:
+
 				$thismessage = $username . ' from ' . 
 					($channel ? $channel : 'DM' ) . 
 					' : ' . $data['text'] ;
 
+				break;
+
+			case 3:
+
+				$thismessage = 'よんだ？';
+
+			}
+
+
+			if (isset($thismessage) ) {
+
 				$this -> send($data['channel'], 
 					$data['user'], $thismessage);
   
-  			}
+ 			}
   
         }
     }

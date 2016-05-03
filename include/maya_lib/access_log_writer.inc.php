@@ -1,7 +1,7 @@
 <?php
 // written by maya minatsuki
 // make this file	2010.09.30
-// last mod		2011.08.30
+// last mod		2016.05.03
 
 
 
@@ -9,8 +9,17 @@
 //	エラー発生時等にアクセスログに記録する。
 //	$chtime : 日時 , $words : ログファイルに記録するメッセージ
 // ---------------------------------------------------------------
-function access_log_writer ( $chtime , $words )
+function access_log_writer ($chtime, $words)
 {
+	if (is_null ($chtime))
+	{
+		$chtime = time() ;
+	}
+
+	if (is_null ($words))
+	{
+		$words = "null" ;
+	}
 
 	// 日時を読みやすく変換
 	$chtime = date ( "Y/m/d H:i:s" , $chtime ) ;

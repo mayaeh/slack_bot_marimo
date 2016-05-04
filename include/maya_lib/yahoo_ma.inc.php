@@ -89,7 +89,7 @@ function yahoo_ma ($text_body, $ma_filter)
 		}
 
 
-    		//$ma_filter = join ( '|' , array_values ($arr_filter) ) ;
+  //  		$ma_filter = join ( '|' , array_values ($arr_filter) ) ;
 
 		if ( isset ($ma_filter) ) {
 			$url .= '&ma_filter=' .
@@ -103,32 +103,37 @@ function yahoo_ma ($text_body, $ma_filter)
 		$xml  = simplexml_load_file ($url) ;
 
 
+// for debug
+//return $xml ;
+
+		$arr_res = array();
+
 		foreach ( $xml -> ma_result -> word_list -> word as $cur ) {
 
 			if ( isset ( $arr_response[0] ) ) {
-				$res .= 'surface : ' . 
-					sqlite_escape_string ( $cur -> surface ) . 
-					"\n" ;
+
+				$arr_res['surface'][] = 
+					sqlite_escape_string ($cur -> surface);
 			}
 			if ( isset ( $arr_response[1] ) ) {
-				$res .= 'reading : ' . 
-					sqlite_escape_string ( $cur -> reading ) . 
-					"\n" ;
+
+				$arr_res['reading'][] =
+					sqlite_escape_string ($cur -> reading);
 			}
 			if ( isset ( $arr_response[2] ) ) {
-				$res .= 'pos : ' . 
-					sqlite_escape_string ( $cur -> pos ) . 
-					"\n" ;
+
+				$arr_res['pos'][] =
+					sqlite_escape_string ($cur -> pos);
 			}
 			if ( isset ( $arr_response[3] ) ) {
-				$res .= 'baseform : ' . 
-					sqlite_escape_string ( $cur -> baseform ) . 
-					"\n" ;
+
+				$arr_res['baseform'][] =
+					sqlite_escape_string ($cur -> baseform);
 			}
 			if ( isset ( $arr_response[4] ) ) {
-				$res .= 'feature : ' . 
-					sqlite_escape_string ( $cur -> feature ) . 
-					"\n" ;
+
+				$arr_res['feature'][] =
+					sqlite_escape_string ($cur -> feature);
 			}
 		}
 
@@ -138,7 +143,7 @@ function yahoo_ma ($text_body, $ma_filter)
 		exit ( '変数が空のため形態素解析を中断します\n' ) ;
 	}
 
-	return $res ;
+	return $arr_res;
 
 }
 

@@ -5,7 +5,7 @@
 
 // Yahoo! Japan Web API の日本語形態素解析を使い解析する
 // urlencode する位置について注意
-function yahoo_ma ($text_body)
+function yahoo_ma ($text_body, $ma_filter)
 {
 
 	// text_body の文字コードを UTF-8 に変換する
@@ -51,7 +51,7 @@ function yahoo_ma ($text_body)
 	// 12 : 助動詞
 	// 13 : 特殊（句読点、カッコ、記号など）
 
-    $arr_filter = array () ;
+    //$arr_filter = array () ;
 
 // 以下のうち必要な分だけコメントアウトを外す
 
@@ -71,8 +71,7 @@ function yahoo_ma ($text_body)
 
 
 
-	if ( isset ($sentence) && $sentence != '' )
-	{
+	if ( isset ($sentence) ) {
 		$url =
 			'http://jlp.yahooapis.jp/MAService/V1/parse?' .
 			'appid=' . YAHOO_J_APP_ID . '&results=ma' ;
@@ -81,16 +80,14 @@ function yahoo_ma ($text_body)
 		$ma_response =
 			join ( ',' , array_values ($arr_response) ) ;
 
-		if ( $ma_response != '' )
-		{
+		if ( isset ($ma_response) ) {
 			$url .= '&ma_response=' . $ma_response ;
 		}
 
 
-    		$ma_filter = join ( '|' , array_values ($arr_filter) ) ;
+    		//$ma_filter = join ( '|' , array_values ($arr_filter) ) ;
 
-		if ( $ma_filter   != '' )
-		{
+		if ( isset ($ma_filter) ) {
 			$url .= '&ma_filter=' .
 				urlencode ($ma_filter) ;
 		}
@@ -102,39 +99,29 @@ function yahoo_ma ($text_body)
 		$xml  = simplexml_load_file ($url) ;
 
 
-		foreach ( $xml -> ma_result -> word_list -> word as $cur )
-		{
-			if ( isset ( $arr_response[0] ) && 
-				$arr_response[0] != "" )
-			{
+		foreach ( $xml -> ma_result -> word_list -> word as $cur ) {
+
+			if ( isset ( $arr_response[0] ) ) {
 				$res .= 'surface : ' . 
 					sqlite_escape_string ( $cur -> surface ) . 
 					"\n" ;
 			}
-			if ( isset ( $arr_response[1] ) && 
-				$arr_response[1] != '' )
-			{
+			if ( isset ( $arr_response[1] ) ) {
 				$res .= 'reading : ' . 
 					sqlite_escape_string ( $cur -> reading ) . 
 					"\n" ;
 			}
-			if ( isset ( $arr_response[2] ) && 
-				$arr_response[2] != '' )
-			{
+			if ( isset ( $arr_response[2] ) ) {
 				$res .= 'pos : ' . 
 					sqlite_escape_string ( $cur -> pos ) . 
 					"\n" ;
 			}
-			if ( isset ( $arr_response[3] ) && 
-				$arr_response[3] != '' )
-			{
+			if ( isset ( $arr_response[3] ) ) {
 				$res .= 'baseform : ' . 
 					sqlite_escape_string ( $cur -> baseform ) . 
 					"\n" ;
 			}
-			if ( isset ( $arr_response[4] ) && 
-				$arr_response[4] != '' )
-			{
+			if ( isset ( $arr_response[4] ) ) {
 				$res .= 'feature : ' . 
 					sqlite_escape_string ( $cur -> feature ) . 
 					"\n" ;

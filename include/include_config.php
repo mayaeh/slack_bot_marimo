@@ -22,4 +22,6 @@ if ( ! function_exists ('sqlite_escape_string') ) {
 
 require_once ( MAYALIB_DIR . 'yahoo_ma.inc.php' ) ;
 
+require_once ( MAYALIB_DIR . 'gshorten.inc.php' ) ;
+
 ?>

@@ -1,0 +1,11 @@
+「(.*)」教えて,search
+「(.*)」調べて,search
+「(.*)」\?$,search
+「(.*)」？$,search
+「(.*)」と\s?tweet\s?して,tweet
+「(.*)」とツイートして,tweet
+最後の\s?tweet\s?消して,tweet_delete
+最後のツイート消して,tweet_delete
+\/h$,help
+help$,help
+ヘルプ$,help

@@ -1,0 +1,16 @@
+git clone https://github.com/jclg/php-slack-bot.git include/jclg-slack-bot
+
+ln -s include/composer.phar include/jclg-slack-bot/composer.phar
+
+cd include/jclg-slack-bot
+
+./composer.phar install
+
+git clone https://github.com/jonnnnyw/php-phantomjs.git include/php-phantomjs
+
+ln -s include/composer.phar include/php-phantomjs/composer.phar
+
+./composer.phar ??
+
+sqlite3 b.db < setup/create_table.sql
+

@@ -53,11 +53,63 @@ class SuperCommand extends \PhpSlackBot\Command\BaseCommand {
 
 			case 2:
 
-				$thismessage = $username . ' from ' . 
-					($channel ? $channel : 'DM' ) . 
-					' : ' . $data['text'] ;
+// for debug
+//$thismessage = $username . ' from ' . 
+//	($channel ? $channel : 'DM' ) . 
+//	' : ' . $data['text'] ;
 
-				break;
+				$db = new SQLite3 (DB_FILE);
+
+				$db_res = $db -> 
+					query ('SELECT * FROM word_verb;');
+
+				while ($row = $db_res -> 
+					fetchArray(SQLITE3_ASSOC)) {
+
+					if (preg_match('/'. $row['word']. '/u', 
+						$data['text'], $matches) ) {
+
+						switch ($row['action']) {
+
+						case 'tweet':
+
+							$action_res = action_tweet ($matches[1]);
+
+							break;
+
+						case 'tweet_delete':
+
+							$action_res = action_tweet_delete();
+
+							break;
+
+						case 'search':
+
+							$action_res = 
+								action_search ($data['text']);
+
+							break;
+
+						case 'help':
+
+							$action_res = action_help();
+
+							break;
+
+						}
+
+					}
+
+				}
+
+				$db -> close();
+
+				if (isset($action_res)) {
+
+					$thismessage = $action_res;
+
+					break;
+				}
 
 			case 3:
 
@@ -72,10 +124,8 @@ class SuperCommand extends \PhpSlackBot\Command\BaseCommand {
 					$data['user'], $thismessage);
   
  			}
-  
         }
     }
-
 }
 
 

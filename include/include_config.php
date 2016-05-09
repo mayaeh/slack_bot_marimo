@@ -24,4 +24,12 @@ require_once ( MAYALIB_DIR . 'yahoo_ma.inc.php' ) ;
 
 require_once ( MAYALIB_DIR . 'gshorten.inc.php' ) ;
 
+require_once ( MAYALIB_DIR . 'action_tweet.inc.php' ) ;
+
+require_once ( MAYALIB_DIR . 'action_tweet_delete.inc.php' ) ;
+
+require_once ( MAYALIB_DIR . 'action_search.inc.php' ) ;
+
+require_once ( MAYALIB_DIR . 'action_help.inc.php' ) ;
+
 ?>

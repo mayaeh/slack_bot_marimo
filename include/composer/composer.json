@@ -1,4 +1,15 @@
 {
+    "name":  "mayaeh/slack_bot_marimo",
+    "type":  "library",
+    "description":  "my slack bot",
+    "license": "MIT",
+    "authors":  [
+        {
+	    "name":  "Maya Minatsuki",
+	    "email":  "mayaeh@marimo-net.org",
+	    "homepage":  "https://twitter.com/mayaeh"
+	}
+    ],
     "require": {
         "devristo/phpws": "dev-master",
         "react/http": "dev-master",

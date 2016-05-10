@@ -6,4 +6,7 @@ error.log
 b.db
 environment.inc.php
 slack_bot_marimo.esproj
+include/composer/composer.lock
+include/composer/vendor
+include/composer/bin
 

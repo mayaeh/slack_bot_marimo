@@ -11,7 +11,7 @@ require_once ( SCRIPT_DIR . "include/unoh_lib/array_get_value.inc.php" ) ;
 // Include Slack API Library. thanks
 //require_once ( SCRIPT_DIR . "include/slack-api/Slack.php" ) ;
 
-// Include jclg-slack-bot Library. thanks
+// Include jclg-slack-bot Library, abraham-twitteroauth Library, PhantomJS Library. thanks
 require_once ( SCRIPT_DIR . 'include/composer/vendor/autoload.php' ) ;
 
 require_once ( MAYALIB_DIR . 'access_log_writer.inc.php' ) ;

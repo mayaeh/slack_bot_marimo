@@ -12,7 +12,7 @@ require_once ( SCRIPT_DIR . "include/unoh_lib/array_get_value.inc.php" ) ;
 //require_once ( SCRIPT_DIR . "include/slack-api/Slack.php" ) ;
 
 // Include jclg-slack-bot Library. thanks
-require_once ( SCRIPT_DIR . 'include/jclg-slack-bot/vendor/autoload.php' ) ;
+require_once ( SCRIPT_DIR . 'include/composer/vendor/autoload.php' ) ;
 
 require_once ( MAYALIB_DIR . 'access_log_writer.inc.php' ) ;
 

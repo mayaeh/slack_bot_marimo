@@ -4,6 +4,13 @@ define ('SCRIPT_DIR', './') ;
 
 define ('SLACK_API_TOKEN', '') ;
 
+define ('TWITTER_CONSUMER_KEY', '') ;
+define ('TWITTER_CONSUMER_SECRET', '') ;
+define ('TWITTER_OAUTH_CALLBACK', '') ;
+
+define ('TWITTER_OAUTH_ACCESS_TOKEN', '') ;
+define ('TWITTER_OAUTH_ACCESS_TOKEN_SECRET', '') ;
+
 define ('YAHOO_J_APP_ID', '') ;
 
 define ('GOOGLE_SEARCH_API_KEY', '') ;

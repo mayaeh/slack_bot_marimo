@@ -1,0 +1,9 @@
+[submodule "include/jclg-slack-bot"]
+	path = include/jclg-slack-bot
+	url = https://github.com/jclg/php-slack-bot.git
+[submodule "include/abraham-twitteroauth"]
+	path = include/abraham-twitteroauth
+	url = https://github.com/abraham/twitteroauth.git
+[submodule "include/php-phantomjs"]
+	path = include/php-phantomjs
+	url = https://github.com/jonnnnyw/php-phantomjs.git

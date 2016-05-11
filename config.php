@@ -3,11 +3,13 @@
 // slack_bot_marimo
 //  用 config ファイル
 // made this file : 2013.07.09
-// last mod. : 2013.07.09
+// last mod. : 2016.05.11
 
 
 // デフォルトのタイムゾーンを設定します。PHP 5.1 以降で使用可能です
 date_default_timezone_set ( 'Asia/Tokyo' ) ;
+
+mb_internal_encoding("UTF-8");
 
 
 // 環境設定ファイルからスクリプト設置ディレクトリの設定を読み込む

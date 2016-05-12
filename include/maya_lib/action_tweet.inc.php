@@ -43,22 +43,48 @@ function action_tweet ($text) {
 
 
 // for debug
-//var_dump($connection);
+//return $connection;
 
-		$screen_name = $statuses -> user -> screen_name;
+		if ($connection -> getLastHttpCode() == 200) {
+		// Tweet posted succesfully
 
-		$id = $statuses -> id_str;
+			$screen_name = 
+				$statuses -> user -> screen_name;
 
-		if (isset($screen_name) and isset($id)) {
+			$id = $statuses -> id_str;
 
-			$tweet_url = 'https://twitter.com/'. 
-				$screen_name . '/status/'. 
-				$id;
+			if (isset($screen_name) and isset($id)) {
 
-			return $tweet_url;
+				$tweet_url = 'https://twitter.com/'. 
+					$screen_name . '/status/'. 
+					$id;
+
+				unset($statuses);
+				unset($connection);
+
+				return "ツイートしました。\n". $tweet_url;
+			}
+		}
+		else {
+
+			$message = 'ツイートに失敗しました。';
+
+			if (property_exists($statuses, 'errors')) {
+				// Handle error case
+
+				$message .= "\n". $statuses -> errors [0] -> message;
+			}
+
+			unset($statuses);
+			unset($connection);
+
+			return $message;
 		}
 	}
+	else {
 
+		return '文字数オーバーです。';
+	}
 }
 
 ?>

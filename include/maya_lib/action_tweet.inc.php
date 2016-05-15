@@ -3,7 +3,7 @@
 function action_tweet ($text) {
 
 	if (!isset($text)) {
-		return null;
+		return '本文が空欄のため中止しました。';
 	}
 
 	// このやり方だけでは URL が含まれていた場合に正しく認識できない

@@ -57,6 +57,7 @@ class SuperCommand extends \PhpSlackBot\Command\BaseCommand {
 //$thismessage = $username . ' from ' . 
 //	($channel ? $channel : 'DM' ) . 
 //	' : ' . $data['text'] ;
+//var_dump($data['text']);
 
 				$db = new SQLite3 (DB_FILE);
 
@@ -68,6 +69,9 @@ class SuperCommand extends \PhpSlackBot\Command\BaseCommand {
 
 					if (preg_match('/'. $row['word']. '/u', 
 						$data['text'], $matches) ) {
+
+// for debug
+//var_dump($matches);
 
 						switch ($row['action']) {
 
@@ -86,7 +90,7 @@ class SuperCommand extends \PhpSlackBot\Command\BaseCommand {
 						case 'search':
 
 							$action_res = 
-								action_search ($data['text']);
+								action_search ($matches);
 
 							break;
 

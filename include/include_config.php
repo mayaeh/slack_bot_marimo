@@ -1,7 +1,7 @@
 <?php
 // written by maya minatsuki
 // made this file : 2016.04.30
-// last mod. : 2016.04.30
+// last mod. : 2016.05.17
 //
 
 
@@ -27,6 +27,8 @@ require_once ( MAYALIB_DIR . 'gshorten.inc.php' ) ;
 require_once ( MAYALIB_DIR . 'action_tweet.inc.php' ) ;
 
 require_once ( MAYALIB_DIR . 'action_tweet_delete.inc.php' ) ;
+
+require_once ( MAYALIB_DIR . 'create_site_image.inc.php' ) ;
 
 require_once ( MAYALIB_DIR . 'action_search.inc.php' ) ;
 

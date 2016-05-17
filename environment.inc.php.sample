@@ -2,6 +2,16 @@
 // スクリプト設置ディレクトリ
 define ('SCRIPT_DIR', './') ;
 
+// 書き出すディレクトリのパス
+define ('OUTPUT_DIR_NAME', SCRIPT_DIR) ;
+
+// SQLite DB ファイル名
+define ('DB_FILE', OUTPUT_DIR_NAME. 'this.db') ;
+
+define ('CAP_OUTPUT_DIR_NAME', OUTPUT_DIR_NAME . '/') ;
+
+define ('CAP_OUTPUT_URL', 'http://path.to/') ;
+
 define ('SLACK_API_TOKEN', '') ;
 
 define ('TWITTER_CONSUMER_KEY', '') ;

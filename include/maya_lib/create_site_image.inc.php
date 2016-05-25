@@ -1,26 +1,11 @@
 <?php
 
-function create_site_image ($search_word) {
+function create_site_image ($url) {
 
-	$base_url='https://www.google.co.jp/search?q=';
-
-// for debug
-//$search_word = '明日 大阪 天気';
-//$search_word = '6740';
-//$search_word = '256/3';
-//$search_word = '今日 何の日';
-//$search_word = 'slack';
-//$search_word = '新居浜市 地図';
-
-	if (!isset ($search_word)) {
+	if(!isset ($url)) {
 
 		return null;
 	}
-
-//var_dump(urlencode($search_word));
-//exit;
-
-	$url = $base_url. urlencode ($search_word);
 
 // my default settings
 //$cap_width = 600;

@@ -32,10 +32,14 @@ function create_site_image ($url) {
 	$request = $client -> getMessageFactory() -> 
 		createCaptureRequest ($url, 'GET');
 
-	$request -> setOutputFile ($output_path. $output_file_name);
-	$request -> setViewportSize (CAP_WIDTH, CAP_HEIGHT);
-	$request -> setCaptureDimensions (CAP_WIDTH, CAP_HEIGHT, 
-		CAP_TOP, CAP_LEFT);
+	$request -> setOutputFile 
+		(CAP_OUTPUT_DIR_NAME. $output_file_name);
+
+	$request -> setViewportSize 
+		(CAP_WIDTH, CAP_HEIGHT);
+
+	$request -> setCaptureDimensions 
+		(CAP_WIDTH, CAP_HEIGHT, CAP_TOP, CAP_LEFT);
 
 	$response = $client -> getMessageFactory() -> 
 		createResponse();
@@ -44,7 +48,7 @@ function create_site_image ($url) {
 
 	if ($response -> getStatus() === 200) {
 
-		return 'success';
+		return $output_file_name;
 	}
 	else {
 

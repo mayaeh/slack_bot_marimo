@@ -17,41 +17,50 @@ class SuperCommand extends \PhpSlackBot\Command\BaseCommand {
 	}
 
 	protected function execute($data, $context) {
-		if ($data['type'] == 'message') {
-			$channel = $this->getChannelNameFromChannelId($data['channel']);
-			$username = $this->getUserNameFromUserId($data['user']);
-            //echo $username.' from '.($channel ? $channel : 'DIRECT MESSAGE').' : '.$data['text'].PHP_EOL;
+
+		if (array_get_value($data, 'type', '')) {
+
+			if ($data['type'] == 'message') {
+				$channel = $this -> getChannelNameFromChannelId 
+					($data['channel']);
+				$username = $this -> getUserNameFromUserId 
+					($data['user']);
+
+//					echo $username.' from '. 
+//						($channel ? $channel : 
+//						'DIRECT MESSAGE').' : '. 
+//						$data['text'].PHP_EOL;
 
 
-			// 文の最初に @marimo を付けて呼ばれた場合
-			if (preg_match ("/^<@" . 
-				BOT_USER_ID . ">/u", 
-				$data['text']) ) {
+				// 文の最初に @marimo を付けて呼ばれた場合
+				if (preg_match ("/^<@" . 
+					BOT_USER_ID . ">/u", 
+					$data['text']) ) {
 
-				$action_flg = 1;
+					$action_flg = 1;
 
-			}
-			// 文の末尾に @marimo を付けて呼ばれた場合
-			else if (preg_match ("/<@" . 
-				BOT_USER_ID . ">$/u", 
-				$data['text']) ) {
+				}
+				// 文の末尾に @marimo を付けて呼ばれた場合
+				else if (preg_match ("/<@" . 
+					BOT_USER_ID . ">$/u", 
+					$data['text']) ) {
 				
-				$action_flg = 2;
-			}
-			// 文の途中で @marimo を付けて呼ばれた場合
-			else if (preg_match ("/<@" . 
-				BOT_USER_ID . ">/u", 
-				$data['text']) ) {
-				
-				$action_flg = 3;
-			}
+					$action_flg = 2;
+				}
+				// 文の途中で @marimo を付けて呼ばれた場合
+				else if (preg_match ("/<@" . 
+					BOT_USER_ID . ">/u", 
+					$data['text']) ) {
+	
+					$action_flg = 3;
+				}
 
 
-			switch ($action_flg) {
+				switch ($action_flg) {
 
-			case 1:
+				case 1:
 
-			case 2:
+				case 2:
 
 // for debug
 //$thismessage = $username . ' from ' . 
@@ -59,74 +68,76 @@ class SuperCommand extends \PhpSlackBot\Command\BaseCommand {
 //	' : ' . $data['text'] ;
 //var_dump($data['text']);
 
-				$db = new SQLite3 (DB_FILE);
+					$db = new SQLite3 (DB_FILE);
 
-				$db_res = $db -> 
-					query ('SELECT * FROM word_verb;');
+					$db_res = $db -> 
+						query ('SELECT * FROM word_verb;');
 
-				while ($row = $db_res -> 
-					fetchArray(SQLITE3_ASSOC)) {
+					while ($row = $db_res -> 
+						fetchArray(SQLITE3_ASSOC)) {
 
-					if (preg_match('/'. $row['word']. '/u', 
-						$data['text'], $matches) ) {
+						if (preg_match('/'. $row['word']. '/u', 
+							$data['text'], $matches) ) {
 
 // for debug
 //var_dump($matches);
 
-						switch ($row['action']) {
+							switch ($row['action']) {
 
-						case 'tweet':
+							case 'tweet':
 
-							$action_res = action_tweet ($matches[1]);
+								$action_res = 
+									action_tweet($matches[1]);
 
-							break;
+								break;
 
-						case 'tweet_delete':
+							case 'tweet_delete':
 
-							$action_res = action_tweet_delete();
+								$action_res = 
+									action_tweet_delete();
 
-							break;
+								break;
 
-						case 'search':
+							case 'search':
 
-							$action_res = 
-								action_search ($matches[1]);
+								$action_res = 
+									action_search ($matches[1]);
 
-							break;
+								break;
 
-						case 'help':
+							case 'help':
 
-							$action_res = action_help();
+								$action_res = action_help();
 
-							break;
+								break;
+
+							}
 
 						}
 
 					}
 
+					$db -> close();
+
+					if (isset($action_res)) {
+
+						$thismessage = $action_res;
+
+						break;
+					}
+
+				case 3:
+
+					$thismessage = 'よんだ？';
+
 				}
 
-				$db -> close();
 
-				if (isset($action_res)) {
+				if (isset($thismessage) ) {
 
-					$thismessage = $action_res;
-
-					break;
-				}
-
-			case 3:
-
-				$thismessage = 'よんだ？';
-
-			}
-
-
-			if (isset($thismessage) ) {
-
-				$this -> send($data['channel'], 
-					$data['user'], $thismessage);
-  
+					$this -> send($data['channel'], 
+						$data['user'], $thismessage);
+  				}
  			}
         }
     }

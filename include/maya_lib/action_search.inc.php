@@ -49,13 +49,19 @@ function action_search ($text) {
 
 	$url = $base_url. urlencode ($search_word);
 
+	$res = $url;
+
 	$output_file_name = create_site_image ($url);
 
 	if (isset ($output_file_name)) {
 
 		$image_url = CAP_OUTPUT_URL. $output_file_name;
 
+		$res .= "\n". $image_url;
+
 	}
+
+	return $res;
 
 }
 

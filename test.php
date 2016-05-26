@@ -90,7 +90,7 @@ class SuperCommand extends \PhpSlackBot\Command\BaseCommand {
 						case 'search':
 
 							$action_res = 
-								action_search ($matches);
+								action_search ($matches[1]);
 
 							break;
 

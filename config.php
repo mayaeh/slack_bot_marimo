@@ -3,32 +3,41 @@
 // slack_bot_marimo
 //  用 config ファイル
 // made this file : 2013.07.09
-// last mod. : 2013.07.09
+// last mod. : 2016.05.11
 
 
 // デフォルトのタイムゾーンを設定します。PHP 5.1 以降で使用可能です
 date_default_timezone_set ( 'Asia/Tokyo' ) ;
 
+mb_internal_encoding ( "UTF-8" ) ;
+
 
 // 環境設定ファイルからスクリプト設置ディレクトリの設定を読み込む
-include ( 'environment.inc.php' ) ;
+if ( is_readable ( 'environment.inc.php' ) ) {
+
+	include ( 'environment.inc.php' ) ;
+}
+else {
+
+	$message = "environment.inc.php.sample を environment.inc.php ". 
+		"と改名し各種設定をしてください。\n" ;
+}
 
 if ( ! defined ( 'SCRIPT_DIR' ) ) {
-	// スクリプト設置ディレクトリ
-	define ( 'SCRIPT_DIR' , "./" ) ;
+
+	$message .= "environment.inc.php 内設定を読み込めませんでした。\n" ;
+	exit ($message) ;
 }
 
 // file_get_contents でのアクセス時用にユーザーエージェントを設定
-ini_set ( 'user_agent' , 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C)' ) ;
+//ini_set ( 'user_agent' , 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C)' ) ;
+ini_set ( 'user_agent' , 'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko' ) ;
 
-
-// 書き出すディレクトリのパス
-//
-define ( 'OUTPUT_DIR_NAME' , SCRIPT_DIR ) ;
-
-// SQLite DB ファイル名
-define ( 'DB_FILE' , OUTPUT_DIR_NAME . 'b.db' ) ;
-
+// php-phantomjs 用
+define ( 'CAP_WIDTH' , 600 ) ;
+define ( 'CAP_HEIGHT' , 400 ) ;
+define ( 'CAP_TOP' , 30 ) ;
+define ( 'CAP_LEFT' , 120 ) ;
 
 
 // エラーログのパス及びファイル名

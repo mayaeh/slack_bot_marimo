@@ -5,7 +5,7 @@ function action_help () {
 	$res_text = "こまんどりすと";
 
 	$patterns = array(
-		'/\\\\s\?/u', '/\(\.\*\)/u', '/\$$/u', '/\\\\/u'
+		'/\\\\s\?/u', '/\(\(.*\)\*\)/u', '/\$$/u', '/\\\\/u'
 		);
 
 	$db = new SQLite3 (DB_FILE);

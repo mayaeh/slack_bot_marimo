@@ -29,6 +29,4 @@ define ('GOOGLE_SEARCH_ID', '') ;
 
 define ('GOOGLE_SHORTEN_API_KEY', '') ;
 
-define ('BOT_USER_ID', '') ;
-
 ?>

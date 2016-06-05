@@ -21,6 +21,16 @@ class SuperCommand extends \PhpSlackBot\Command\BaseCommand {
 		if (array_get_value($data, 'type', '')) {
 
 			if ($data['type'] == 'message') {
+
+// for debug
+//var_dump($data);
+//var_dump($context);
+//var_dump($context['self']['id']);
+
+
+				$bot_user_id = 
+					$context['self']['id'];
+
 				$channel = $this -> getChannelNameFromChannelId 
 					($data['channel']);
 				$username = $this -> getUserNameFromUserId 
@@ -34,7 +44,7 @@ class SuperCommand extends \PhpSlackBot\Command\BaseCommand {
 
 				// 文の最初に @marimo を付けて呼ばれた場合
 				if (preg_match ("/^<@" . 
-					BOT_USER_ID . ">/u", 
+					$bot_user_id . ">/u", 
 					$data['text']) ) {
 
 					$action_flg = 1;
@@ -42,14 +52,14 @@ class SuperCommand extends \PhpSlackBot\Command\BaseCommand {
 				}
 				// 文の末尾に @marimo を付けて呼ばれた場合
 				else if (preg_match ("/<@" . 
-					BOT_USER_ID . ">$/u", 
+					$bot_user_id . ">$/u", 
 					$data['text']) ) {
 				
 					$action_flg = 2;
 				}
 				// 文の途中で @marimo を付けて呼ばれた場合
 				else if (preg_match ("/<@" . 
-					BOT_USER_ID . ">/u", 
+					$bot_user_id . ">/u", 
 					$data['text']) ) {
 	
 					$action_flg = 3;

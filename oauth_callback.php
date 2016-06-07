@@ -10,6 +10,16 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 //login.phpでセットしたセッション
 $request_token = array();
 
+$request_token['oauth_token'] = null;
+$request_token['oauth_token_secret'] = null;
+
+if (!array_get_value($_SESSION, 'oauth_token','') or 
+	!array_get_value($_SESSION, 'oauth_token_secret','') or 
+	!array_get_value($_REQUEST, 'oauth_token','') ) {
+
+	header('location: oauth_index.html');
+}
+
 $request_token['oauth_token'] = $_SESSION['oauth_token'];
 
 $request_token['oauth_token_secret'] = 
@@ -37,7 +47,17 @@ $_SESSION['access_token'] = $connection ->
 //セッションIDをリジェネレート
 session_regenerate_id();
 
-//リダイレクト
-header('location: oauth_success.html');
+//ユーザー情報をGET
+$user = $connection -> get("account/verify_credentials");
+
+if (isset($user -> name)) {
+
+	//リダイレクト
+	header('location: oauth_success.html');
+}
+else {
+
+	echo "ユーザー情報の取得に失敗しました。\n";
+}
 
 ?>

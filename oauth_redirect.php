@@ -21,7 +21,7 @@ $_SESSION['oauth_token'] = $request_token['oauth_token'];
 $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
 
 // twitter.com での認証画面 URL を取得
-$url = $connection -> url('oauth_authenticate', 
+$url = $connection -> url('oauth/authorize', 
 	array('oauth_token' => $request_token ['oauth_token']) );
 
 // twitter.com へリダイレクト
